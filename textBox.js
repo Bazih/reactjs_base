@@ -5,7 +5,7 @@ const source = { text: 'This is mini post.' };
 const TextBox = ({text}) => (
   DOM.span(
     null,
-    `${text}`
+    text
   )
 );
 

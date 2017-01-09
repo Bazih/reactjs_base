@@ -13,12 +13,12 @@ const source =
 const Image = ({ src, style:{width, height}, alt }) => (
   DOM.img(
     {
-      src: `${src}`,
+      src: src,
       style: {
-        width: `${width}`,
-        height: `${height}`
+        width: width,
+        height: height
       },
-      alt: `${alt}`
+      alt: alt
     }
   )
 );
