@@ -2,14 +2,7 @@ class Image extends React.Component {
   render() {
     const { src, style:{width, height}, alt } = this.props.image;
     return (
-      DOM.img(
-        {
-          src,
-          width,
-          height,
-          alt
-        }
-      )
+      <img src={src} width={width} height={height} alt={alt} />
     )
   }
 };

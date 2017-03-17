@@ -1,8 +1,5 @@
 const TextBox = ({text}) => (
-  DOM.span(
-    null,
-    text
-  )
+  <span>text</span>
 );
 
 TextBox.defaultProps = {

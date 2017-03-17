@@ -8,6 +8,7 @@ const source = [
       {
         postData: {
 
+        }
       },
       {
         postData: {
@@ -52,7 +53,7 @@ const source = [
 class BlogPage extends React.Component {
   render() {
     return (
-      DOM.div(null, React.createElement(BlogList, {...this.props}))
+      <div><BlogList {...this.props} /></div>
     )
   }
 };
@@ -65,7 +66,9 @@ class BlogList extends React.Component {
       _.map(
         this.props,
         (source, key) => (
-          DOM.div({ key }, React.createElement(BlogItem, source))
+          <div key={ key }>
+            <BlogItem {...source} />
+          </div>
         )
       )
     );
@@ -122,25 +125,19 @@ class Image extends React.Component {
   render() {
     const { src, style:{width, height}, alt } = this.props.image;
     return (
-      DOM.img(
-        {
-          src,
-          width,
-          height,
-          alt
-        }
-      )
+      <img src={src} width={width} height={height} alt={alt} />
     )
   }
 };
 Image.defaultProps = {
   image: {
-  src: "http://placehold.it/150x200/f0d0bc/000/&text=Image",
-  style: {
-    width: '150px',
-    height: '200px'
-  },
-  alt: 'Description'}
+    src: "http://placehold.it/150x200/f0d0bc/000/&text=Image",
+    style: {
+      width: '150px',
+      height: '200px'
+    },
+    alt: 'Description'
+  }
 };
 Image.propTypes = {
   image: PropTypes.shape({
@@ -154,10 +151,7 @@ Image.propTypes = {
 };
 
 const TextBox = ({text}) => (
-  DOM.span(
-    null,
-    text
-  )
+  <span>text</span>
 );
 TextBox.defaultProps = {
   text: 'This is post'
@@ -167,12 +161,11 @@ TextBox.propTypes = {
 };
 
 const Meta = ({meta:{author, created_at, updated_at}}) => (
-  DOM.ul(
-    null,
-    DOM.li(null, 'Автор: ' + author),
-    DOM.li(null, 'Создано: ' + moment(created_at).format('D MMM YYYY')),
-    DOM.li(null, 'Изменено: ' + moment(updated_at).format('D MMM YYYY')),
-  )
+  <ul>
+    <li>Автор: { author }</li>
+    <li>Создано: { moment(created_at).format('D MMM YYYY') }</li>
+    <li>Изменено: {moment(updated_at).format('D MMM YYYY') }</li>
+  </ul>
 );
 Meta.defaultProps = {
   meta: {

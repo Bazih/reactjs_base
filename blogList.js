@@ -6,7 +6,9 @@ class BlogList extends React.Component {
       _.map(
         this.props,
         (source, key) => (
-          DOM.div({ key }, React.createElement(BlogItem, source))
+          <div key={ key }>
+            <BlogItem {...source} />
+          </div>
         )
       )
     );
