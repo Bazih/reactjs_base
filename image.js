@@ -1,29 +1,36 @@
-const DOM = React.DOM;
+class Image extends React.Component {
+  render() {
+    const { src, style:{width, height}, alt } = this.props.image;
+    return (
+      DOM.img(
+        {
+          src,
+          width,
+          height,
+          alt
+        }
+      )
+    )
+  }
+};
 
-const source =
-      {
-        src: 'https://ozon-st.cdn.ngenix.net/multimedia/1013279403.jpg',
-        style: {
-          width: '150px',
-          height: '200px'
-        },
-        alt: 'JavaScript и jQuery. Исчерпывающее руководство'
-      };
+Image.defaultProps = {
+  image: {
+  src: "http://placehold.it/150x200/f0d0bc/000/&text=Image",
+  style: {
+    width: '150px',
+    height: '200px'
+  },
+  alt: 'Description'}
+};
 
-const Image = ({ src, style:{width, height}, alt }) => (
-  DOM.img(
-    {
-      src: src,
-      style: {
-        width: width,
-        height: height
-      },
-      alt: alt
-    }
-  )
-);
-
-ReactDOM.render(
-  React.createElement(Image, source),
-  document.getElementById('app')
-);
+Image.propTypes = {
+  image: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    style: PropTypes.shape({
+      width: PropTypes.string.isRequired,
+      height: PropTypes.string.isRequired
+    }),
+    alt: PropTypes.string
+  })
+};

@@ -1,7 +1,3 @@
-const DOM = React.DOM;
-
-const source = { text: 'This is mini post.' };
-
 const TextBox = ({text}) => (
   DOM.span(
     null,
@@ -9,7 +5,10 @@ const TextBox = ({text}) => (
   )
 );
 
-ReactDOM.render(
-  React.createElement(TextBox, source),
-  document.getElementById('app')
-);
+TextBox.defaultProps = {
+  text: 'This is post'
+};
+
+TextBox.propTypes = {
+  text: PropTypes.string.isRequired
+};
