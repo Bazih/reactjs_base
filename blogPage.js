@@ -78,19 +78,21 @@ class BlogList extends React.Component {
 class BlogItem extends React.Component {
   render() {
     const { postData } = this.props;
+    const { image, meta } = postData;
     return (
       <div className="blog-item">
-        <Image {...postData} />
+        <Image {...image} />
         <TextBox {...postData} />
-        <Meta {...postData} />
-        <Like {...postData.meta} />
+        <Meta {...meta} />
+        <Like {...meta} />
       </div>
     );
   }
 };
 BlogItem.propTypes = {
-  postData: PropTypes.object.isRequired,
-  children: PropTypes.number
+  postData: PropTypes.shape({
+    image: PropTypes.shape(Image.propTypes)
+  })
 };
 
 class Like extends React.Component {
@@ -123,35 +125,31 @@ Like.propTypes = {
 
 class Image extends React.Component {
   render() {
-    const { src, style:{width, height}, alt } = this.props.image;
+    const { src, style:{width, height}, alt } = this.props;
     return (
       <img src={src} width={width} height={height} alt={alt} />
     )
   }
 };
 Image.defaultProps = {
-  image: {
-    src: "http://placehold.it/150x200/f0d0bc/000/&text=Image",
-    style: {
-      width: '150px',
-      height: '200px'
-    },
-    alt: 'Description'
-  }
+  src: "http://placehold.it/150x200/f0d0bc/000/&text=Image",
+  style: {
+    width: '150px',
+    height: '200px'
+  },
+  alt: 'Description'
 };
 Image.propTypes = {
-  image: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    style: PropTypes.shape({
-      width: PropTypes.string.isRequired,
-      height: PropTypes.string.isRequired
-    }),
-    alt: PropTypes.string
-  })
+  src: PropTypes.string.isRequired,
+  style: PropTypes.shape({
+    width: PropTypes.string.isRequired,
+    height: PropTypes.string.isRequired
+  }),
+  alt: PropTypes.string
 };
 
 const TextBox = ({text}) => (
-  <span>text</span>
+  <span>{ text }</span>
 );
 TextBox.defaultProps = {
   text: 'This is post'
@@ -160,7 +158,7 @@ TextBox.propTypes = {
   text: PropTypes.string.isRequired
 };
 
-const Meta = ({meta:{author, created_at, updated_at}}) => (
+const Meta = ({author, created_at, updated_at}) => (
   <ul>
     <li>Автор: { author }</li>
     <li>Создано: { moment(created_at).format('D MMM YYYY') }</li>
@@ -168,18 +166,14 @@ const Meta = ({meta:{author, created_at, updated_at}}) => (
   </ul>
 );
 Meta.defaultProps = {
-  meta: {
-    author: 'false',
-    created_at: 'false',
-    updated_at: 'false'
-  }
+  author: 'false',
+  created_at: 'false',
+  updated_at: 'false'
 };
 Meta.propTypes = {
-  meta: PropTypes.shape({
-    author: PropTypes.string.isRequired,
-    created_at: PropTypes.string,
-    updated_at: PropTypes.string
-  })
+  author: PropTypes.string.isRequired,
+  created_at: PropTypes.string,
+  updated_at: PropTypes.string
 };
 
 ReactDOM.render(

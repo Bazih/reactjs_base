@@ -1,5 +1,5 @@
 const TextBox = ({text}) => (
-  <span>text</span>
+  <span>{ text }</span>
 );
 
 TextBox.defaultProps = {

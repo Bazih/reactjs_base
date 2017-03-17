@@ -1,18 +1,20 @@
 class BlogItem extends React.Component {
   render() {
     const { postData } = this.props;
+    const { image, meta } = postData;
     return (
       <div className="blog-item">
-        <Image {...postData} />
+        <Image {...image} />
         <TextBox {...postData} />
-        <Meta {...postData} />
-        <Like {...postData.meta} />
+        <Meta {...meta} />
+        <Like {...meta} />
       </div>
     );
   }
 };
 
 BlogItem.propTypes = {
-  postData: PropTypes.object.isRequired,
-  children: PropTypes.number
+  postData: PropTypes.shape({
+    image: PropTypes.shape(Image.propTypes)
+  })
 };
